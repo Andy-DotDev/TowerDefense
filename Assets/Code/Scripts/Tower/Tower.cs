@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
@@ -6,8 +7,14 @@ public class Tower : MonoBehaviour
     public float range = 5f;
     public int damage = 25;
     public float fireRate = 1f;
-    public float rotationSpeed = 30f;
+    public float rotationSpeed = 120f;
 
+    [Header("Targeting mode")]
+    public bool first = true;
+    public bool last = false; 
+    public bool strong = false;
+
+    [NonSerialized] 
     public GameObject target;
     private float cooldown = 0f;
     void Start()

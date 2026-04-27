@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   rb: {fileID: 2724770505730568974}
+  health: 150
   moveSpeed: 2
   flipThreshold: 0.1
   minMoveThreshold: 0.01

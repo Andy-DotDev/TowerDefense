@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy: MonoBehaviour
@@ -8,13 +9,14 @@ public class Enemy: MonoBehaviour
 
 
     [Header("Attributes")]
-    [SerializeField] private int health = 50;
+    public int health = 50;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float flipThreshold = 0.1f;
     [SerializeField] private float minMoveThreshold = 0.01f;
 
     private Transform target;
-    private int pathIndex = 0;
+    [NonSerialized] public int pathIndex = 0;
+    [NonSerialized] public float distance = 0;
 
     private void Awake()
     {
@@ -27,7 +29,8 @@ public class Enemy: MonoBehaviour
 
     private void Update()
     {
-
+        target = EnemyManager.main.path[pathIndex];
+        distance = Vector2.Distance(transform.position, target.position); 
 
         if (Vector2.Distance(target.position, transform.position) <= 0.1f) { 
             pathIndex++;
