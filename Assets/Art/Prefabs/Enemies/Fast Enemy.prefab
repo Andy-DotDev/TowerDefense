@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8401269755088080053}
-  - component: {fileID: 7788658859351485402}
   - component: {fileID: 4778623914705623432}
+  - component: {fileID: 7788658859351485402}
   - component: {fileID: 4683439834360433743}
   m_Layer: 0
   m_Name: Fast Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,22 +36,6 @@ Transform:
   - {fileID: 3620168795839662536}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7788658859351485402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639390900434734525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 989b70ffc447da549a61f5019d13f48c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  rb: {fileID: 4683439834360433743}
-  moveSpeed: 4
-  flipThreshold: 0.1
-  minMoveThreshold: 0.01
 --- !u!61 &4778623914705623432
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -82,7 +66,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -98,6 +82,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.343189, y: 1.7292771}
   m_EdgeRadius: 0
+--- !u!114 &7788658859351485402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639390900434734525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989b70ffc447da549a61f5019d13f48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  rb: {fileID: 4683439834360433743}
+  moveSpeed: 4
+  flipThreshold: 0.1
+  minMoveThreshold: 0.01
 --- !u!50 &4683439834360433743
 Rigidbody2D:
   serializedVersion: 5

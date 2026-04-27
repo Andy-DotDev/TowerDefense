@@ -8,6 +8,7 @@ public class Enemy: MonoBehaviour
 
 
     [Header("Attributes")]
+    [SerializeField] private int health = 50;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float flipThreshold = 0.1f;
     [SerializeField] private float minMoveThreshold = 0.01f;
@@ -32,13 +33,18 @@ public class Enemy: MonoBehaviour
             pathIndex++;
             if (pathIndex >= EnemyManager.main.path.Length)
             {
-                EnemySpawner.onEnemyDestroy.Invoke();
+                EnemyManager.main.OnEnemyDestroyed();
                 Destroy(gameObject);
                 return;
             }
             else {
                 target = EnemyManager.main.path[pathIndex];
             }
+        }
+        if (health <= 0) {
+            EnemyManager.main.OnEnemyDestroyed();
+            Destroy(gameObject);
+            return;
         }
     }
 
@@ -54,5 +60,10 @@ public class Enemy: MonoBehaviour
            
 
         rb.linearVelocity = direction * moveSpeed;
+    }
+
+    public void damage(int damage) { 
+        health-=damage;
+        Debug.Log("-25");
     }
 }

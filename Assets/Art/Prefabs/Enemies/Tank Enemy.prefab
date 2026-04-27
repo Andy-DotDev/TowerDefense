@@ -191,12 +191,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 755791696921926357}
-  - component: {fileID: 2983978269783501183}
   - component: {fileID: 2724770505730568974}
   - component: {fileID: 5484528264105046228}
+  - component: {fileID: 2983978269783501183}
   m_Layer: 0
   m_Name: Tank Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,22 +218,6 @@ Transform:
   - {fileID: 5587560265302729208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2983978269783501183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7865793321354209032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 989b70ffc447da549a61f5019d13f48c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  rb: {fileID: 2724770505730568974}
-  moveSpeed: 2
-  flipThreshold: 0.1
-  minMoveThreshold: 0.01
 --- !u!50 &2724770505730568974
 Rigidbody2D:
   serializedVersion: 5
@@ -291,7 +275,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -307,3 +291,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.0660667, y: 0.62762976}
   m_EdgeRadius: 0
+--- !u!114 &2983978269783501183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7865793321354209032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989b70ffc447da549a61f5019d13f48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  rb: {fileID: 2724770505730568974}
+  moveSpeed: 2
+  flipThreshold: 0.1
+  minMoveThreshold: 0.01
