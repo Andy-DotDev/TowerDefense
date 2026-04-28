@@ -9,7 +9,7 @@ public class RocketTower : Tower
     void Start()
     {
         fireRate = 2f;
-        damage = 40;
+        damage = 70;
         rotationSpeed = 60f;
         projectileSpeed = rocketSpeed;
     }

@@ -67,6 +67,5 @@ public class Enemy: MonoBehaviour
 
     public void damage(int damage) { 
         health-=damage;
-        Debug.Log("-25");
     }
 }
