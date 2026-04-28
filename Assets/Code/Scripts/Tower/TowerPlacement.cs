@@ -10,8 +10,11 @@ public class TowerPlacement : MonoBehaviour
 
     [NonSerialized] public bool isPlacing = true;
     private bool isRestricted = false;
+
+    private Tower tower;
     void Awake()
     {
+        tower = GetComponent<Tower>();
         rangeCollider.enabled = false;
     }
 
@@ -22,10 +25,11 @@ public class TowerPlacement : MonoBehaviour
 
             transform.position = mousePosition;
         }
-        if (Input.GetMouseButtonDown(1) && !isRestricted)
+        if (Input.GetMouseButtonDown(1) && !isRestricted && tower.cost < Player.main.money)
         {
             rangeCollider.enabled = true;
             isPlacing = false;
+            Player.main.money -= tower.cost;
 
             Transform rangeObj = transform.Find("Range");
             if (rangeObj != null)

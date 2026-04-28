@@ -10,6 +10,7 @@ public class Tower : MonoBehaviour
     public float fireRate = 1f;
     public float rotationSpeed = 120f;
     public float projectileSpeed = 7f;
+    public int cost = 50;
 
     [Header("Targeting mode")]
     public bool first = true;
@@ -63,7 +64,6 @@ public class Tower : MonoBehaviour
         Vector3 targetPosition = target.transform.position;
         float spawnTime = Time.time;
 
-        // Двигаем снаряд к цели
         while (Vector3.Distance(projectile.transform.position, targetPosition) > 0.1f)
         {
             projectile.transform.position = Vector3.MoveTowards(
@@ -72,7 +72,7 @@ public class Tower : MonoBehaviour
                 projectileSpeed * Time.deltaTime
             );
 
-            // Поворачиваем снаряд по направлению движения
+
             Vector3 direction = targetPosition - projectile.transform.position;
             if (direction != Vector3.zero)
             {

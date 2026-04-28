@@ -1,5 +1,7 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TowerManager : MonoBehaviour
 {
@@ -8,18 +10,22 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private GameObject rocketTower;
 
     [SerializeField] private LayerMask towerLayer;
+
+    [SerializeField] private GameObject panel;
+    [SerializeField] private TextMeshProUGUI towerName;
+    [SerializeField] private TextMeshProUGUI towerLevel;
+    [SerializeField] private TextMeshProUGUI UpgradeCost;
+    [SerializeField] private TextMeshProUGUI towerTargetting;
+
     private GameObject selectedTower;
     private GameObject placingTower;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            setTower(pistolTower);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
         {
-            setTower(rocketTower);
+            return; // Если клик по UI - выходим и не обрабатываем клик по миру
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             ClearSelected();
         }
@@ -49,18 +55,44 @@ public class TowerManager : MonoBehaviour
                 Transform newRange = selectedTower.transform.Find("Range"); // Ищем по имени!
                 if (newRange != null)
                     newRange.GetComponent<SpriteRenderer>().enabled = true;
-            }
-            else
-            {
-                // Клик в пустоту -> снимаем выделение
-                if (selectedTower != null)
+
+                panel.SetActive(true);
+                towerName.text = selectedTower.name.Replace("(Clone)", "").Trim();
+
+                // ✅ Добавляем проверки на компоненты
+                TowerUpgrade upgrade = selectedTower.GetComponent<TowerUpgrade>();
+                if (upgrade != null)
                 {
-                    Transform oldRange = selectedTower.transform.Find("Range");
-                    if (oldRange != null)
-                        oldRange.GetComponent<SpriteRenderer>().enabled = false;
-                    selectedTower = null;
+                    towerLevel.text = "Tower LVL: " + upgrade.currentLevel.ToString();
+                    UpgradeCost.text = upgrade.currentCost;
+                }
+
+                Tower tower = selectedTower.GetComponent<Tower>();
+                if (tower != null)
+                {
+                    if (tower.first)
+                    {
+                        towerTargetting.text = "First";
+                    }
+                    else if (tower.last)
+                    {
+                        towerTargetting.text = "Last";
+                    }
+                    else if (tower.strong)
+                    {
+                        towerTargetting.text = "Strong";
+                    }
                 }
             }
+            else if (!EventSystem.current.IsPointerOverGameObject() && selectedTower) {
+                panel.SetActive(false);
+                Transform oldRange = selectedTower.transform.Find("Range"); // Ищем по имени!
+                if (oldRange != null)
+                    oldRange.GetComponent<SpriteRenderer>().enabled = false;
+                selectedTower = null;
+            }
+           
+           
         }
 
         if (Input.GetKeyDown(KeyCode.U) && selectedTower)
@@ -76,8 +108,44 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    private void setTower(GameObject tower) {
+    public void setTower(GameObject tower) {
         ClearSelected();
         placingTower = Instantiate(tower);
     }
+
+    public void UpgradeSelected() {
+        if (selectedTower) {
+            selectedTower.GetComponent<TowerUpgrade>().Upgrade();
+            towerLevel.text = "Tower LVL: " + selectedTower.GetComponent<TowerUpgrade>().currentLevel.ToString();
+            UpgradeCost.text = selectedTower.GetComponent<TowerUpgrade>().currentCost;
+        }
+    }
+    public void ChangeTargetting() {
+        if (selectedTower) {
+            Tower tower = selectedTower.GetComponent<Tower>();
+
+            if (tower.first)
+            {
+                tower.first = false;
+                tower.last = true;
+                tower.strong = false;
+                towerTargetting.text = "Last";
+            }
+            else if (tower.last)
+            {
+                tower.first = false;
+                tower.last = false;
+                tower.strong = true;
+                towerTargetting.text = "Strong";
+            }
+            else if (tower.strong)
+            {
+                tower.first = true;
+                tower.last = false;
+                tower.strong = false;
+                towerTargetting.text = "First";
+            }
+        }
+    }
+
 }

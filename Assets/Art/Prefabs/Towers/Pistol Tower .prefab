@@ -421,6 +421,7 @@ MonoBehaviour:
   fireRate: 1
   rotationSpeed: 120
   projectileSpeed: 10
+  cost: 50
   first: 1
   last: 0
   strong: 0
@@ -457,7 +458,9 @@ MonoBehaviour:
   - range: 5
     damage: 20
     fireRate: 0.9
+    cost: 150
   - range: 6
     damage: 30
     fireRate: 0.7
+    cost: 300
   towerRange: {fileID: 4467876995424981688}
