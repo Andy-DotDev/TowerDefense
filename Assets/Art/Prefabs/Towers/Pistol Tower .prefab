@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7618060972443771614}
   - component: {fileID: 2252849935626444345}
   - component: {fileID: 4467876995424981688}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 972056471839065331}
   - component: {fileID: 4879350790648740199}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FireEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,8 @@ GameObject:
   - component: {fileID: 556353161085623925}
   - component: {fileID: 2437132429336952842}
   - component: {fileID: 3211005477001113557}
-  m_Layer: 0
+  - component: {fileID: 2632366351847482795}
+  m_Layer: 9
   m_Name: 'Pistol Tower '
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -267,8 +268,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1031687396336397672}
   - {fileID: 972056471839065331}
+  - {fileID: 1031687396336397672}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6929006689256444010
@@ -416,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   range: 5
-  damage: 25
+  damage: 10
   fireRate: 1
   rotationSpeed: 120
   projectileSpeed: 10
@@ -440,3 +441,23 @@ MonoBehaviour:
   rangeCollider: {fileID: 2252849935626444345}
   gray: {r: 0.5, g: 0.4787736, b: 0.4787736, a: 0.5882353}
   red: {r: 0.9433962, g: 0.19134924, b: 0.19134924, a: 0.5882353}
+--- !u!114 &2632366351847482795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7866882558693272074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c2f420835ecb648ab49543459665b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerUpgrade
+  levels:
+  - range: 5
+    damage: 20
+    fireRate: 0.9
+  - range: 6
+    damage: 30
+    fireRate: 0.7
+  towerRange: {fileID: 4467876995424981688}

@@ -22,10 +22,22 @@ public class TowerPlacement : MonoBehaviour
 
             transform.position = mousePosition;
         }
-        if (Input.GetMouseButtonDown(1) && !isRestricted) {
+        if (Input.GetMouseButtonDown(1) && !isRestricted)
+        {
             rangeCollider.enabled = true;
             isPlacing = false;
-            GetComponent<TowerPlacement>().enabled = false;
+
+            Transform rangeObj = transform.Find("Range");
+            if (rangeObj != null)
+            {
+                SpriteRenderer rangeSprite = rangeObj.GetComponent<SpriteRenderer>();
+                if (rangeSprite != null)
+                {
+                    rangeSprite.enabled = false;
+                }
+            }
+
+            this.enabled = false;
         }
         if (isRestricted)
         {
