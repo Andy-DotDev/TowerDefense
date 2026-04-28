@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI HPGui;
     [SerializeField] private TextMeshProUGUI MoneyGUI;
 
+    [SerializeField] private GameObject gameOverGUI;
+
     private void Awake()
     {
         main = this;
@@ -19,5 +22,19 @@ public class Player : MonoBehaviour
     {
         HPGui.text = "HP: " + health.ToString();
         MoneyGUI.text = "Money: " + money.ToString();
+    }
+
+    public void damage(int damage) {
+        health -=damage;
+
+        if (health <= 0) {
+            gameOverGUI.SetActive(true);
+        }
+    }
+
+    public void restart()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }
